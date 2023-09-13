@@ -16,7 +16,7 @@ const {PORT, MONGO_DB_URL} = process.env;
 
 app.use(cors({
     credentials: true,
-    origin: [`http://localhost:${PORT}`, "https://z-commerce.vercel.app"]
+    origin: ["http://localhost:5173", "https://z-commerce.vercel.app"]
 }))
 
 
