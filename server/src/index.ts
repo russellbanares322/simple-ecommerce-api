@@ -7,6 +7,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import router from '../src/router/index';
+import path from 'path';
 
 const app = express();
 dotenv.config()
@@ -24,7 +25,7 @@ app.use(cors({
 app.use(compression())
 app.use(bodyParser.json())
 app.use(cookieParser());
-
+app.use("/", express.static(path.join(__dirname, 'public')))
 //Server
 const server = http.createServer(app);
 
