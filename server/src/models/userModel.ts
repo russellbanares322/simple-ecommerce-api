@@ -12,11 +12,16 @@ const Schema = mongoose.Schema;
             type: String,
             required: true
         },
+        cart: {
+            type: Array,
+            required: false
+        },
         authentication: {
             password: { 
                 type: String, 
                 required: true, 
-                select: false},
+                select: false
+            },
             salt: {
                 type:String,
                 required: true,
@@ -28,7 +33,7 @@ const Schema = mongoose.Schema;
             },
         },
     },
-   {timestamps: true}
+   { timestamps: true }
 )
 
 export const UserModel = mongoose.model("User", UserSchema)

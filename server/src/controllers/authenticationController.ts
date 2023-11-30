@@ -20,6 +20,7 @@ export const register = async(req: Request, res: Response) => {
         const user = await createUser({
             email,
             username,
+            cart: [],
             authentication: {
                 salt,
                 password: authentication(salt, password)
@@ -45,7 +46,7 @@ export const login = async(req: Request, res: Response) => {
             return res.sendStatus(400)
         }
 
-        const expectedHash = authentication(user.authentication.salt, password);
+        const expectedHash = authentication(user.authentication.salt as string, password);
         
         if(user.authentication.password !== expectedHash){
             return res.sendStatus(403)
@@ -54,7 +55,7 @@ export const login = async(req: Request, res: Response) => {
         user.authentication.sessionToken = authentication(salt, user._id.toString())
 
         await user.save();
-        res.cookie('ECOMMERCE-AUTH', user.authentication.sessionToken, {domain: 'localhost', path:'/'});
+        res.cookie('ECOMMERCE-AUTH', user.authentication.sessionToken, { domain: 'localhost', path:'/' });
         return res.status(200).json(user).end()
 
     } catch(error){
